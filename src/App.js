@@ -3,7 +3,6 @@ import Form from "./component/Form";
 import styled from "styled-components";
 import "./App.css";
 
-//Styled components
 const AppContainer = styled.div`
   width: 80%;
   margin: auto;
