@@ -4,8 +4,6 @@ import * as yup from "yup";
 import schema from "../schema/schema";
 import axios from "axios";
 
-//Styled components
-
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,7 +50,6 @@ const UserContainer = styled.div`
   }
 `;
 
-//Default blank form
 const defaultFormData = {
   name: "",
   email: "",
@@ -71,19 +68,14 @@ const defaultErrorState = {
 };
 
 export default function Form(props) {
-  //Hold form values in state
   const [formData, setFormData] = useState(defaultFormData);
 
-  //Set Yup errors during validation
   const [errors, setErrors] = useState(defaultErrorState);
 
-  //Disable button until form is complete
   const [disabled, setDisabled] = useState(true);
 
-  //Keep track of users entered
   const [users, setUsers] = useState([]);
 
-  //Every time form data is filled out, check schema to see if it's valid. If so disable button.
   useEffect(() => {
     schema
       .isValid(formData)
@@ -91,7 +83,6 @@ export default function Form(props) {
       .catch((err) => alert(err));
   }, [formData]);
 
-  //Check the schema and set errors for display
   const setFormErrors = (name, value) => {
     yup
       .reach(schema, name)
@@ -116,9 +107,8 @@ export default function Form(props) {
   };
 
   const handleForm = (evt) => {
-    //Get target name, it's value and type and checked from field user interacted with
     const { name, value, checked, type } = evt.target;
-    //Check if the input was a checkbox, if so set checked state as value, else use the input fields value
+
     const valueToUse = type === "checkbox" ? checked : value;
     setFormErrors(name, valueToUse);
     setFormData({ ...formData, [name]: valueToUse });

@@ -1,6 +1,5 @@
 import * as yup from "yup";
 
-//Yup Validation Schema
 const schema = yup.object().shape({
   name: yup
     .string()
